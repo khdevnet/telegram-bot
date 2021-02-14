@@ -6,7 +6,7 @@ class UserNumber {
 }
 
 
-const bot = new TelegramBot("618906845:AAEbB4nDBfuQftzJEPf5rcIco0ZWmwW_1I8", { polling: true });
+const bot = new TelegramBot("", { polling: true });
 const usersQueue: UserNumber[] = [];
 let counter = 0;
 
