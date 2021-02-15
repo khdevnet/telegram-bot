@@ -1,12 +1,23 @@
-# Node-Typescript-Starter
+# Market cap track new token telegram bot
 
-Run the docker container for local development by using the following command
+## Tech Stack
+* nodejs
+* mongodb
+* node-telegram-bot
+* nodecron
+* axis
 
-``` docker-compose -f docker-compose.yml -docker-compose.override.yml up -d --build  ```
+
+Run telegram bot
+
+``` npm start  ```
 
 
-Run the docker container for production by using the following command
+Bot commands
 
-``` docker-compose -f docker-compose.yml -docker-compose.prod.yml up -d --build ```
-
-You can also pass the environment variables using *-e VARIABLE_NAME=...*
+```
+# /l - listing
+/l add "Token code"
+/l remove "Token code"
+/l all
+```
