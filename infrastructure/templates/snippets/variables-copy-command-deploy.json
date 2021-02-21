@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceLocation": {
+      "type": "string",
+      "defaultValue": "West Europe"
+    },
+    "serviceNames": {
+      "type": "array",
+      "defaultValue": [
+        "contoso",
+        "fabrikam",
+        "coho"
+      ]
+    }
+  },
+  "variables": {
+    "copy": [
+      {
+        "name": "serviceDetails",
+        "count": "[length(parameters('serviceNames'))]",
+        "input": {
+          "Name": "[parameters('serviceNames')[copyIndex('serviceDetails')]]"
+        }
+      }
+    ]
+  },
+  "resources": [],
+  "outputs": {
+    "arrayResult": {
+      "type": "array",
+      "value": "[variables('serviceDetails')]"
+    }
+  }
+}

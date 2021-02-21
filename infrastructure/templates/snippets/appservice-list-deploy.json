@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceLocation": {
+      "type": "string",
+      "defaultValue": "West Europe"
+    },
+    "serviceNames": {
+      "type": "array",
+      "defaultValue": [
+        "contoso",
+        "fabrikam",
+        "coho"
+      ]
+    }
+  },
+  "variables": {
+    "ServerFarm": {
+      "Name": "low",
+      "Id": "[resourceId('Microsoft.Web/serverfarms', [variables('ServerFarm').Name])]"
+    },
+    "copy": [
+      {
+        "name": "serviceDetails",
+        "count": "[length(parameters('serviceNames'))]",
+        "input": {
+          "Name": "[parameters('serviceNames')[copyIndex('serviceDetails')]]"
+        }
+      }
+    ]
+  },
+  "resources": [
+    {
+      "name": "[variables('ServerFarm').Name]",
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2020-06-01",
+      "location": "[parameters('resourceLocation')]",
+      "tags": {
+        "displayName": "Server Farm"
+      },
+      "kind": "linux",
+      "properties": {
+        "name": "[variables('ServerFarm').Name]",
+        "reserved": true
+      }
+    }
+  ],
+  "outputs": {}
+}
